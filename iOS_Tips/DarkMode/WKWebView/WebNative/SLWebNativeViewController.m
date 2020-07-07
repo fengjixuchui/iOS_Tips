@@ -13,6 +13,7 @@
 #import "SLAvPlayer.h"
 #import <YYModel.h>
 #import "SLReusableManager.h"
+#import "SLPictureBrowseController.h"
 
 @interface SLWebNativeModel : NSObject<YYModel>
 @property (nonatomic, copy) NSString *tagID; //标签ID
@@ -29,6 +30,7 @@
 
 @interface SLWebNativeCell : SLReusableCell
 @property (nonatomic, strong) YYAnimatedImageView *imageView;
+@property (nonatomic, assign) CGSize imageViewSize;
 @property (nonatomic, strong) UIImageView *playIcon;
 @end
 @implementation SLWebNativeCell
@@ -58,7 +60,27 @@
 }
 
 - (void)updateDataWith:(SLWebNativeModel *)model {
-    [_imageView yy_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholder:nil];
+    _imageView.layer.contentsRect = CGRectMake(0, 0, 1, 1);
+    __weak typeof(self) weakSelf = self;
+    [self.imageView yy_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholder:nil options:YYWebImageOptionShowNetworkActivity completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+        if(error) return ;
+        if (image.size.width > image.size.height) {
+            //宽图
+            CGFloat width = weakSelf.imageViewSize.height*image.size.width/image.size.height;
+            if (width > weakSelf.imageViewSize.width) {
+                CGFloat proportion = weakSelf.imageViewSize.width/width;
+                weakSelf.imageView.layer.contentsRect = CGRectMake((1 - proportion)/2, 0, proportion, 1);
+            }
+        }else if (image.size.width < image.size.height) {
+            //长图
+            CGFloat height = weakSelf.imageViewSize.width*image.size.height/image.size.width;
+            if (height > weakSelf.imageViewSize.height) {
+                CGFloat proportion = weakSelf.imageViewSize.height/height;
+                weakSelf.imageView.layer.contentsRect = CGRectMake(0,(1 - proportion)/2, 1, proportion);
+            }
+        }
+    }];
+    
     if ([model.type isEqualToString:@"image"]) {
         //图片
         _playIcon.hidden = YES;
@@ -85,7 +107,7 @@
  2.html界面调整时，要去重新调用JS方法获取原生标签的位置并更新native组件的位置。
  3.如果仅需要处理HTML的图片元素，也可以不用原生组件imageView展示，原生下载处理图片，然后通过oc调用JS设置图片
  */
-@interface SLWebNativeViewController ()<WKNavigationDelegate, WKUIDelegate, SLReusableDataSource, SLReusableDelegate>
+@interface SLWebNativeViewController ()<WKNavigationDelegate, WKUIDelegate, SLReusableDataSource, SLReusableDelegate, SLPictureAnimationViewDelegate>
 
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
 @property (nonatomic, strong) WKWebView * webView;
@@ -250,7 +272,7 @@
             CGRect frame = CGRectMake(
                                       [frameDict[@"x"] floatValue], [frameDict[@"y"] floatValue], [frameDict[@"width"] floatValue], [frameDict[@"height"] floatValue]);
             if(!CGRectEqualToRect(frame, CGRectZero)) {
-                 [weakSelf.frameArray addObject:[NSValue valueWithCGRect:frame]];
+                [weakSelf.frameArray addObject:[NSValue valueWithCGRect:frame]];
             }
             dispatch_semaphore_signal(weakSelf.semaphore);
             if (i == weakSelf.dataSource.count - 1) {
@@ -272,6 +294,7 @@
 - (SLReusableCell *)reusableManager:(SLReusableManager *)reusableManager cellForRowAtIndex:(NSInteger)index {
     SLWebNativeCell *cell = (SLWebNativeCell *)[reusableManager dequeueReusableCellWithIdentifier:@"cellID" index:index];
     SLWebNativeModel *model = self.dataSource[index];
+    cell.imageViewSize = [self.frameArray[index] CGRectValue].size;
     [cell updateDataWith:model];
     return cell;
 }
@@ -282,6 +305,11 @@
     if ([model.type isEqualToString:@"image"]) {
         //图片
         NSLog(@"点击了 %ld 图片", index);
+        SLPictureBrowseController *pictureBrowseController = [[SLPictureBrowseController alloc] init];
+        pictureBrowseController.imagesArray = [NSMutableArray arrayWithArray:@[[NSURL URLWithString:model.imgUrl]]];
+        pictureBrowseController.indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self presentViewController:pictureBrowseController animated:YES completion:nil];
+        
     }else if ([model.type isEqualToString:@"video"]) {
         //视频
         NSLog(@"点击了 %ld 视频", index);
@@ -289,6 +317,17 @@
         //音频
         NSLog(@"点击了 %ld 音频", index);
     }
+}
+
+#pragma mark - SLPictureAnimationViewDelegate
+//用于转场的动画视图
+- (UIView *)animationViewOfPictureTransition:(NSIndexPath *)indexPath {
+    SLWebNativeCell *imageCell = (SLWebNativeCell *)[self.reusableManager  cellForRowAtIndex:indexPath.row];
+    UIImageView *tempView = [UIImageView new];
+    tempView.image = imageCell.imageView.image;
+    tempView.layer.contentsRect = imageCell.imageView.layer.contentsRect;
+    tempView.frame = [imageCell.imageView convertRect:imageCell.imageView.bounds toView:self.view];
+    return tempView;
 }
 
 @end
