@@ -7,9 +7,21 @@
 //
 
 #import "SLCrashViewController.h"
+#import "SLCrashProtector.h"
 #import "BSBacktraceLogger.h"
 
-@interface SLCrashViewController ()
+/*
+ 参考资料：
+ https://www.jianshu.com/p/29051908c74b  iOS Crash分析
+ https://juejin.im/post/5d81fac66fb9a06af7126a44  iOS获取任意线程调用栈
+ https://blog.csdn.net/jasonblog/article/details/49909209  iOS中线程Call Stack的捕获和解析（二）
+ https://www.jianshu.com/p/b5304d3412e4  iOS app崩溃捕获
+ https://www.jianshu.com/p/8d43b4b47913  Crash产生原因
+ https://developer.aliyun.com/article/499180 iOS Mach异常和signal信号
+ */
+@interface SLCrashViewController ()<SLCrashHandlerDelegate>
+
+@property (nonatomic, strong) UITextView *textView;
 
 @property (nonatomic, copy) void(^testBlock)(void); //测试循环引用
 @property (nonatomic, strong) NSMutableArray *testMArray; //测试循环引用
@@ -33,10 +45,78 @@
 - (void)setupUI {
     self.navigationItem.title = @"iOS Crash防护";
     self.view.backgroundColor = [UIColor whiteColor];
-    [SLCrashHandler defaultCrashHandler].crashHandlerBlock = ^(SLCrashError * _Nonnull crashError) {
-//        NSLog(@"%@/%@" ,crashError.errorDesc, [BSBacktraceLogger bs_backtraceOfCurrentThread]);
-    };
-    [self testCallStack];
+    
+    NSArray *methods = @[@"testArray",
+                         @"testMutableArray",
+                         @"testDictionary",
+                         @"testMutableDictionary",
+                         @"testString",
+                         @"testMutableString",
+                         @"testUnrecognizedSelector",
+                         @"testKVO",
+                         @"testKVC",
+                         @"testWildPointer",
+                         @"testMemoryLeak",
+                         @"testCallStack"];
+    NSArray *titles = @[@"数组越界、空值",
+                        @"可变数组越界、空值",
+                        @"字典越界、空值",
+                        @"可变字典越界、空值",
+                        @"字符串越界、空值",
+                        @"可变字符串越界、空值",
+                        @"未实现方法",
+                        @"KVO",
+                        @"KVC",
+                        @"野指针",
+                        @"内存泄漏/循环引用",
+                        @"回调栈"];
+    CGSize size = CGSizeMake(self.view.sl_width/4.0, 66);
+    int i = 0;
+    for (NSString *method in methods) {
+        UIButton *testBtn = [[UIButton alloc] initWithFrame:CGRectMake(i%4*size.width, SL_TopNavigationBarHeight+ i/4*size.height, size.width, size.height)];
+        [testBtn setTitle:titles[i] forState:UIControlStateNormal];
+        testBtn.backgroundColor = UIColor.orangeColor;
+        testBtn.titleLabel.numberOfLines = 0;
+        testBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        testBtn.layer.borderColor = [UIColor blackColor].CGColor;
+        testBtn.layer.borderWidth = 1.0;
+        [testBtn addTarget:self action:NSSelectorFromString(method) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:testBtn];
+        i++;
+    }
+    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(0, SL_TopNavigationBarHeight+ i/4*size.height, self.view.sl_width, self.view.sl_height - (SL_TopNavigationBarHeight+ i/4*size.height))];
+    self.textView.editable = NO;
+    self.textView.text = @"点击上方测试内容按钮，在此输出异常捕获结果...";
+    [self.view addSubview:self.textView];
+    
+    [SLCrashHandler defaultCrashHandler].delegate = self;
+    
+}
+
+#pragma mark - SLCrashHandlerDelegate
+///异常捕获回调 提供给外界实现自定义处理 ，日志上报等（注意线程安全）
+- (void)crashHandlerDidOutputCrashError:(SLCrashError *)crashError {
+    NSString *errorInfo = [NSString stringWithFormat:@" 错误描述：%@ \n 调用栈：%@" ,crashError.errorDesc, crashError.callStackSymbol];
+
+    SL_DISPATCH_ON_MAIN_THREAD((^{
+        [self.textView scrollsToTop];
+        self.textView.text = errorInfo;
+    }));
+    ///日志写入缓存，适当时机上传后台
+    NSString *logPath = [SL_CachesDir stringByAppendingFormat:@"/com.wsl2ls.CrashLog"];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:logPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:logPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    if(![[NSFileManager defaultManager] fileExistsAtPath:[logPath stringByAppendingFormat:@"/log"]]) {
+        NSError *error;
+        [errorInfo writeToFile:[logPath stringByAppendingFormat:@"/log"] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    }else {
+        NSFileHandle * fileHandle = [NSFileHandle fileHandleForWritingAtPath:[logPath stringByAppendingFormat:@"/log"]];
+        [fileHandle seekToEndOfFile];
+        [fileHandle writeData:[errorInfo dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle closeFile];
+    }
+    
 }
 
 #pragma mark - Container Crash
@@ -73,6 +153,7 @@
     NSMutableArray *mArray1 = [NSMutableArray arrayWithObject:nil];
     NSMutableArray *mArray2 = [NSMutableArray arrayWithObject:@[nilObj]];
     [mArray addObject:nilObj];
+    
 }
 
 ///不可变字典防护 nil值
@@ -165,8 +246,10 @@
 ///野指针  随机性太强，不方便复现和定位问题，我们需要做的就是把随机变为必现，并且定位到对应的代码，方便查找解决
 ///思路来源： https://www.jianshu.com/p/9fd4dc046046?utm_source=oschina-app
 - (void)testWildPointer {
-    //开启僵尸对象嗅探定位
+    //开启僵尸对象嗅探定位 可以打开或关闭此开关看看效果就知道了
+    // 目前还不完善，不推荐使用 ，仅做交流学习
     [SLZombieFinder startSniffer];
+    
     
     UILabel *label = [[UILabel alloc] init];
     //-fno-objc-arc 记得设置此类编译方式支持MRC
@@ -174,12 +257,19 @@
     [label release];
     
     //这时新建一个示例对象，覆盖掉了野指针label所指向的内存空间，如果此时没有创建此同类，就会崩溃
-    UILabel* newView = [[UILabel alloc] initWithFrame:CGRectMake(0,200,SL_kScreenWidth, 60)];
+    UILabel* newView = [[UILabel alloc] initWithFrame:CGRectMake(0,SL_kScreenHeight- 60,SL_kScreenWidth, 60)];
     newView.backgroundColor = [UIColor greenColor];
+    newView.text = @"startSniffer开启 显示正常";
     [self.view addSubview:newView];
     
-    //向野指针label指向的内存对象发送修改颜色的消息，结果是newView接收到了，因为newView和label是同类，可以处理此消息,所以没有崩溃
+    //向野指针label指向的内存对象发送修改颜色的消息，结果是newView接收到了，因为newView和label是同类，可以处理此消息,所以没有崩溃； 在不开启startSniffer时，就把newView的backgroundColor修改了，开启startSniffer后，阻断了向野指针发消息的过程
     label.backgroundColor = [UIColor orangeColor];
+    label.text = @"startSniffer关闭 我是野指针，显示错误";
+    
+    
+    [SLDelayPerform sl_startDelayPerform:^{
+        [newView removeFromSuperview];
+    } afterDelay:2.0];
     
 }
 
@@ -188,23 +278,25 @@
 //思路来源：https://github.com/Tencent/MLeaksFinder.git
 //查找循引用连 FBRetainCycleDetector  https://yq.aliyun.com/articles/66857  、 https://blog.csdn.net/majiakun1/article/details/78747226
 - (void)testMemoryLeak {
-        self.testBlock = ^{
-            self;
-        };
-//        self.testMArray = [[NSMutableArray alloc] initWithObjects:self, nil];
+    
+    //执行此方法后，返回上一级界面，发现SLCrashViewController对象没释放
+    self.testBlock = ^{
+        self;
+    };
+    //        self.testMArray = [[NSMutableArray alloc] initWithObjects:self, nil];
 }
 
 #pragma mark - 函数调用栈
 ///获取任意线程的函数调用栈  https://toutiao.io/posts/aveig6/preview
 - (void)testCallStack {
     //打印当前线程调用栈
-//    BSLOG;
+    BSLOG;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-         //在子线程中 打印主线程调用栈，会发现栈基本是空的，因为都已释放了
-//           BSLOG_MAIN
-         BSLOG;
+        //在子线程中 打印主线程调用栈，会发现栈基本是空的，因为都已释放了
+        //           BSLOG_MAIN
+        //        BSLOG;
     });
-//    BSLOG_MAIN
+    //    BSLOG_MAIN
 }
 
 @end

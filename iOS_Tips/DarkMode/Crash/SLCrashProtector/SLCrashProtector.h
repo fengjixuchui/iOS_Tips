@@ -23,7 +23,7 @@ static inline void SL_ExchangeInstanceMethod(Class _originalClass ,SEL _original
     BOOL didAddMethod = class_addMethod(_originalClass, _originalSel, method_getImplementation(methodNew), method_getTypeEncoding(methodNew));
     if (didAddMethod) {
         // 进行方法的替换
-        class_replaceMethod(_originalClass, _targetSel, method_getImplementation(methodOriginal), method_getTypeEncoding(methodOriginal));
+        class_replaceMethod(_targetClass, _targetSel, method_getImplementation(methodOriginal), method_getTypeEncoding(methodOriginal));
     }else{
         // 交换 IMP 指针
         method_exchangeImplementations(methodOriginal, methodNew);
@@ -34,6 +34,23 @@ static inline void SL_ExchangeClassMethod(Class _class ,SEL _originalSel,SEL _ex
     Method methodOriginal = class_getClassMethod(_class, _originalSel);
     Method methodNew = class_getClassMethod(_class, _exchangeSel);
     method_exchangeImplementations(methodOriginal, methodNew);
+}
+
+/*是否是系统类*/
+static inline BOOL IsSystemClass(Class cls){
+    __block BOOL isSystem = NO;
+    NSString *className = NSStringFromClass(cls);
+    if ([className hasPrefix:@"NS"]) {
+        isSystem = YES;
+        return isSystem;
+    }
+    NSBundle *mainBundle = [NSBundle bundleForClass:cls];
+    if (mainBundle == [NSBundle mainBundle]) {
+        isSystem = NO;
+    }else{
+        isSystem = YES;
+    }
+    return isSystem;
 }
 
 

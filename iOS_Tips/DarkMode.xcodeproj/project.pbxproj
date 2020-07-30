@@ -67,7 +67,10 @@
 		784C4BE424BC4C5E00D5C199 /* SLAPMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 784C4BE324BC4C5E00D5C199 /* SLAPMManager.m */; };
 		784C4BE724BC53D500D5C199 /* SLAPMCpu.m in Sources */ = {isa = PBXBuildFile; fileRef = 784C4BE624BC53D500D5C199 /* SLAPMCpu.m */; };
 		784C4BEA24BDA2DE00D5C199 /* SLProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 784C4BE924BDA2DE00D5C199 /* SLProxy.m */; };
-		784C4BED24BDA5D700D5C199 /* SLAPMFps.m in Sources */ = {isa = PBXBuildFile; fileRef = 784C4BEC24BDA5D700D5C199 /* SLAPMFps.m */; };
+		784C4BED24BDA5D700D5C199 /* SLAPMFluency.m in Sources */ = {isa = PBXBuildFile; fileRef = 784C4BEC24BDA5D700D5C199 /* SLAPMFluency.m */; };
+		784C4C3A24C2EE6600D5C199 /* SLAPMMemoryDisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 784C4C3924C2EE6600D5C199 /* SLAPMMemoryDisk.m */; };
+		784C4C6E24C5B4F500D5C199 /* 笔记.md in Resources */ = {isa = PBXBuildFile; fileRef = 784C4C6D24C5B4F500D5C199 /* 笔记.md */; };
+		784C4C7024C5B5DD00D5C199 /* 高质量技术博客.md in Resources */ = {isa = PBXBuildFile; fileRef = 784C4C6F24C5B5DD00D5C199 /* 高质量技术博客.md */; };
 		7851CB362331CC87002295B5 /* SLDarkModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7851CB332331CC87002295B5 /* SLDarkModeViewController.m */; };
 		7851CB372331CC87002295B5 /* SLDarkModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7851CB352331CC87002295B5 /* SLDarkModeViewController.xib */; };
 		7851CB43233222E2002295B5 /* UIView+SLFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 7851CB41233222E2002295B5 /* UIView+SLFrame.m */; };
@@ -118,6 +121,7 @@
 		788ACD622390BFD400737EC2 /* SLLoadImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 788ACD612390BFD400737EC2 /* SLLoadImageVC.m */; };
 		788ACD652390EA3A00737EC2 /* SLCubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788ACD642390EA3A00737EC2 /* SLCubeViewController.m */; };
 		788ADB382441F48F00302CD9 /* SLCrashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788ADB362441F48F00302CD9 /* SLCrashViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		789AD16324C99DCA00CB0B4C /* SLAPMThreadCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 789AD16224C99DCA00CB0B4C /* SLAPMThreadCount.m */; };
 		78A179A8249B0AA8006F52E3 /* NSDictionary+SLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A179A6249B0AA8006F52E3 /* NSDictionary+SLExtension.m */; };
 		78A1998C2451BEE7005B2B4B /* UIButton+SLTitleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A1998B2451BEE7005B2B4B /* UIButton+SLTitleImage.m */; };
 		78A1998F2451C049005B2B4B /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A1998E2451C049005B2B4B /* SLButton.m */; };
@@ -276,8 +280,12 @@
 		784C4BE624BC53D500D5C199 /* SLAPMCpu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAPMCpu.m; sourceTree = "<group>"; };
 		784C4BE824BDA2DE00D5C199 /* SLProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLProxy.h; sourceTree = "<group>"; };
 		784C4BE924BDA2DE00D5C199 /* SLProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLProxy.m; sourceTree = "<group>"; };
-		784C4BEB24BDA5D700D5C199 /* SLAPMFps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAPMFps.h; sourceTree = "<group>"; };
-		784C4BEC24BDA5D700D5C199 /* SLAPMFps.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAPMFps.m; sourceTree = "<group>"; };
+		784C4BEB24BDA5D700D5C199 /* SLAPMFluency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAPMFluency.h; sourceTree = "<group>"; };
+		784C4BEC24BDA5D700D5C199 /* SLAPMFluency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAPMFluency.m; sourceTree = "<group>"; };
+		784C4C3824C2EE6600D5C199 /* SLAPMMemoryDisk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAPMMemoryDisk.h; sourceTree = "<group>"; };
+		784C4C3924C2EE6600D5C199 /* SLAPMMemoryDisk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAPMMemoryDisk.m; sourceTree = "<group>"; };
+		784C4C6D24C5B4F500D5C199 /* 笔记.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "笔记.md"; sourceTree = "<group>"; };
+		784C4C6F24C5B5DD00D5C199 /* 高质量技术博客.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "高质量技术博客.md"; sourceTree = "<group>"; };
 		7851CB332331CC87002295B5 /* SLDarkModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLDarkModeViewController.m; sourceTree = "<group>"; };
 		7851CB342331CC87002295B5 /* SLDarkModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDarkModeViewController.h; sourceTree = "<group>"; };
 		7851CB352331CC87002295B5 /* SLDarkModeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SLDarkModeViewController.xib; sourceTree = "<group>"; };
@@ -371,6 +379,8 @@
 		788ACD642390EA3A00737EC2 /* SLCubeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLCubeViewController.m; sourceTree = "<group>"; };
 		788ADB352441F48F00302CD9 /* SLCrashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLCrashViewController.h; sourceTree = "<group>"; };
 		788ADB362441F48F00302CD9 /* SLCrashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLCrashViewController.m; sourceTree = "<group>"; };
+		789AD16124C99DCA00CB0B4C /* SLAPMThreadCount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAPMThreadCount.h; sourceTree = "<group>"; };
+		789AD16224C99DCA00CB0B4C /* SLAPMThreadCount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAPMThreadCount.m; sourceTree = "<group>"; };
 		78A179A6249B0AA8006F52E3 /* NSDictionary+SLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SLExtension.m"; sourceTree = "<group>"; };
 		78A179A7249B0AA8006F52E3 /* NSDictionary+SLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SLExtension.h"; sourceTree = "<group>"; };
 		78A1998A2451BEE7005B2B4B /* UIButton+SLTitleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+SLTitleImage.h"; sourceTree = "<group>"; };
@@ -617,8 +627,12 @@
 				784C4BE324BC4C5E00D5C199 /* SLAPMManager.m */,
 				784C4BE524BC53D500D5C199 /* SLAPMCpu.h */,
 				784C4BE624BC53D500D5C199 /* SLAPMCpu.m */,
-				784C4BEB24BDA5D700D5C199 /* SLAPMFps.h */,
-				784C4BEC24BDA5D700D5C199 /* SLAPMFps.m */,
+				784C4C3824C2EE6600D5C199 /* SLAPMMemoryDisk.h */,
+				784C4C3924C2EE6600D5C199 /* SLAPMMemoryDisk.m */,
+				784C4BEB24BDA5D700D5C199 /* SLAPMFluency.h */,
+				784C4BEC24BDA5D700D5C199 /* SLAPMFluency.m */,
+				789AD16124C99DCA00CB0B4C /* SLAPMThreadCount.h */,
+				789AD16224C99DCA00CB0B4C /* SLAPMThreadCount.m */,
 			);
 			path = APM;
 			sourceTree = "<group>";
@@ -857,6 +871,8 @@
 		7884247C24920FCA00C2E505 /* WorkIssues */ = {
 			isa = PBXGroup;
 			children = (
+				784C4C6F24C5B5DD00D5C199 /* 高质量技术博客.md */,
+				784C4C6D24C5B4F500D5C199 /* 笔记.md */,
 				7884247D2492102900C2E505 /* SLWorkIssuesViewController.h */,
 				7884247E2492102900C2E505 /* SLWorkIssuesViewController.m */,
 				784C4BDE24BC409600D5C199 /* APM */,
@@ -1263,6 +1279,7 @@
 				782CFB6E239E69F3001B5528 /* Scale.vsh in Resources */,
 				78BDE04D248BFBD7002ED386 /* wsl.png in Resources */,
 				782CFB37239E22AC001B5528 /* SplitScreen_9.fsh in Resources */,
+				784C4C7024C5B5DD00D5C199 /* 高质量技术博客.md in Resources */,
 				7811F7AF24B32A1E000AA044 /* Order File.png in Resources */,
 				782CFB76239E6A02001B5528 /* SoulOut.vsh in Resources */,
 				782CFB54239E4587001B5528 /* SplitScreen_16.fsh in Resources */,
@@ -1277,6 +1294,7 @@
 				783FB4612394A76B0039AEFD /* shaderf.fsh in Resources */,
 				7811F7AD24B32A1E000AA044 /* Write Link Map File.png in Resources */,
 				782CFB2F239E04A2001B5528 /* SplitScreen_4.vsh in Resources */,
+				784C4C6E24C5B4F500D5C199 /* 笔记.md in Resources */,
 				782CFB67239E6651001B5528 /* HexagonMosaic.vsh in Resources */,
 				782CFB2B239E0479001B5528 /* SplitScreen_3.vsh in Resources */,
 				782CFB5B239E6227001B5528 /* Gray.vsh in Resources */,
@@ -1428,7 +1446,7 @@
 				780F5306236D8570000D0EA8 /* SLImageClipController.m in Sources */,
 				782CFB6A239E68D5001B5528 /* SLSpecialEffectsViewController.m in Sources */,
 				7884248B2493851B00C2E505 /* SLViewController.m in Sources */,
-				784C4BED24BDA5D700D5C199 /* SLAPMFps.m in Sources */,
+				784C4BED24BDA5D700D5C199 /* SLAPMFluency.m in Sources */,
 				78E72D5124766E4B00751373 /* SLWebViewController.m in Sources */,
 				78B10493232F57C50051579F /* main.m in Sources */,
 				788424C724978E9200C2E505 /* SLKeyChain.m in Sources */,
@@ -1447,8 +1465,10 @@
 				782CFB57239E5FE6001B5528 /* SLShaderFilterViewController.m in Sources */,
 				7822CCF8235B054200E70C29 /* SLPaddingLabel.m in Sources */,
 				784C4BE424BC4C5E00D5C199 /* SLAPMManager.m in Sources */,
+				784C4C3A24C2EE6600D5C199 /* SLAPMMemoryDisk.m in Sources */,
 				78842468248FAED100C2E505 /* SLColorPickerViewController.m in Sources */,
 				787C7DCF2462B03D005DF7ED /* UINavigationController+SLMLeakFinder.m in Sources */,
+				789AD16324C99DCA00CB0B4C /* SLAPMThreadCount.m in Sources */,
 				788ACD622390BFD400737EC2 /* SLLoadImageVC.m in Sources */,
 				78E72D5C247BDDE700751373 /* SLWebTableViewController2.m in Sources */,
 				78842454248F863500C2E505 /* SLTableViewController.m in Sources */,

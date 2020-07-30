@@ -11,7 +11,10 @@
 
 
 /*
- 参考资料：https://www.jianshu.com/p/95df83780c8f
+ 参考资料：
+ https://www.jianshu.com/p/95df83780c8f
+ https://www.jianshu.com/p/8123fc17fe0e
+ https://juejin.im/post/5e92a113e51d4547134bdadb
  */
 
 @interface SLAPMViewController ()
@@ -26,6 +29,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"APM监控";
     [self setupNavigationBar];
+    [SLAPMManager manager].type = SLAPMTypeThreadCount;
+}
+
+//测试卡顿
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    //耗时任务
+//    sleep(1);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        sleep(1);
+    });
 }
 
 #pragma mark - UI
