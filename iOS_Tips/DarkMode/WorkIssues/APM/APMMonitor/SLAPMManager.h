@@ -24,8 +24,12 @@ typedef NS_ENUM(NSInteger, SLAPMType) {
     SLAPMTypeCrash   = 1 << 3,
     /*线程数量监控，防止线程爆炸*/
     SLAPMTypeThreadCount   = 1 << 4,
+    /*网络监控*/
+    SLAPMTypeNetwork   = 1 << 5,
+    /*VC启动耗时监测*/
+    SLAPMTypeVCTime   = 1 << 6,
     /*所有策略*/
-    SLAPMTypeAll     = 1 << 5
+    SLAPMTypeAll     = 1 << 7
 };
 
 

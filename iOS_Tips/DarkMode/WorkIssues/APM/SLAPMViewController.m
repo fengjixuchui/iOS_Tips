@@ -9,7 +9,6 @@
 #import "SLAPMViewController.h"
 #import "SLAPMManager.h"
 
-
 /*
  参考资料：
  https://www.jianshu.com/p/95df83780c8f
@@ -18,7 +17,6 @@
  */
 
 @interface SLAPMViewController ()
-
 @end
 
 @implementation SLAPMViewController
@@ -29,21 +27,45 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"APM监控";
     [self setupNavigationBar];
-    [SLAPMManager manager].type = SLAPMTypeThreadCount;
+    [SLAPMManager manager].type = SLAPMTypeNetwork;
 }
-
-//测试卡顿
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    //耗时任务
-//    sleep(1);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        sleep(1);
-    });
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    sleep(3);
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 #pragma mark - UI
 - (void)setupNavigationBar {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:([SLAPMManager manager].isMonitoring ? @"停止":@"开始") style:UIBarButtonItemStyleDone target:self action:@selector(changeMonitorState)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:([SLAPMManager manager].isMonitoring ? @"停止监控":@"开始监控") style:UIBarButtonItemStyleDone target:self action:@selector(changeMonitorState)];
+}
+
+#pragma mark - Help Methods
+///测试卡顿/流畅度
+- (void)testFluency {
+    //耗时任务
+    //    sleep(1);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        sleep(1);
+    });
+}
+///测试网络监控
+- (void)testNetworkMonitor {
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.mas_equalTo(0);
+    }];
+
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://b-ssl.duitang.com/uploads/item/201507/13/20150713182820_5mHce.jpeg"]]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            imageView.image = image;
+        });
+    });
 }
 
 #pragma mark - Events Handle
