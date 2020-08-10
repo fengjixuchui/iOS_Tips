@@ -38,7 +38,9 @@
 >> 8.5、UIScrollView实现原理  
 >> 8.6、UITableView的实现原理 
 
-> [结尾](#结尾)  
+> [高质量技术博客集合](iOS_Tips/DarkMode/WorkIssues/高质量技术博客.md)  
+> [结尾](#结尾)
+
  
 ## 1-暗黑模式适配
 
@@ -125,11 +127,11 @@
 #### 6.7-[二进制重排优化启动速度](https://juejin.im/post/5ea79839f265da7bba509590)
 #### 6.8-[iOS APM应用性能监控管理(doing)]()
 
-> CPU占用率、内存/磁盘使用率、卡顿监控定位、Crash防护、线程数量监控、网络监控(TCP 建立连接时间 、DNS 时间、 SSL时间、首包时间、响应时间 、流量)、ViewController启动耗时监测 ......
+> CPU占用率、内存/磁盘使用率、卡顿监控定位、Crash防护、线程数量监控、网络监控(TCP 建立连接时间 、DNS 时间、 SSL时间、首包时间、响应时间 、流量)、ViewController启动耗时监测 、load方法的耗时、方法执行耗时......
 
 ## 7-iOSCrash防护 
 
->  Crash防护内容涉及 NSArray/NSMutableArray、NSDictionary/NSMutableDictionary、NSString/NSMutableString、Unrecognized Selector、KVO、KVC 、野指针定位、内存泄漏/循环引用；主要是对常见易错的地方进行容错处理，避免崩溃，并保存出错时的函数调用栈，以方便快速定位代码，主要是利用的runtime和fishook知识。
+>  Crash防护内容涉及 NSArray/NSMutableArray、NSDictionary/NSMutableDictionary、NSString/NSMutableString、Unrecognized Selector、KVO、KVC 、异步线程刷新UI、野指针定位、内存泄漏/循环引用；主要是对常见易错的地方进行容错处理，避免崩溃，并保存出错时的函数调用栈，以方便快速定位代码，主要是利用的runtime和fishook知识。
 
 ![iOSCrash防护](https://github.com/wsl2ls/iOS_TipsPreview/blob/master/PrviewPicture/iOSCrash防护.gif)
 
