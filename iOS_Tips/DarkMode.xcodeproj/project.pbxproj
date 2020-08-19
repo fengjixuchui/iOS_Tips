@@ -499,6 +499,7 @@
 		78EF8B6324188767008D0CD7 /* SLAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAlertView.m; sourceTree = "<group>"; };
 		78F42021237915730093497C /* SLGPUImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLGPUImageController.h; sourceTree = "<group>"; };
 		78F42022237915730093497C /* SLGPUImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLGPUImageController.m; sourceTree = "<group>"; };
+		78F4E41224E5404A000B2ADE /* SLToolMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLToolMacro.h; sourceTree = "<group>"; };
 		78F54914233383D800910215 /* SLBlurView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLBlurView.h; sourceTree = "<group>"; };
 		78F54915233383D800910215 /* SLBlurView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLBlurView.m; sourceTree = "<group>"; };
 		78FA0F9B235407E6003E456B /* SLDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDrawView.h; sourceTree = "<group>"; };
@@ -810,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				78AA10F42371A7B50044A6F8 /* PrefixHeader.pch */,
+				78F4E41224E5404A000B2ADE /* SLToolMacro.h */,
 				78777CE4238FF65C006FA671 /* SLDelayPerform.h */,
 				78777CE5238FF65C006FA671 /* SLDelayPerform.m */,
 				783504622452C20B0071283E /* SLMethod.h */,
@@ -858,6 +860,13 @@
 				78A1998E2451C049005B2B4B /* SLButton.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		78799E7E24ED11A400DA8C7A /* 设计模式 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "设计模式";
 			sourceTree = "<group>";
 		};
 		78842455248F92D400C2E505 /* AVFoundation */ = {
@@ -993,8 +1002,9 @@
 				7884247C24920FCA00C2E505 /* WorkIssues */,
 				788ADB342441F46500302CD9 /* Crash */,
 				78E72D4E24766E1300751373 /* WKWebView */,
-				78B10489232F57C30051579F /* Main.storyboard */,
+				78799E7E24ED11A400DA8C7A /* 设计模式 */,
 				78B1048C232F57C50051579F /* Assets.xcassets */,
+				78B10489232F57C30051579F /* Main.storyboard */,
 				78B1048E232F57C50051579F /* LaunchScreen.storyboard */,
 				78B10491232F57C50051579F /* Info.plist */,
 				78B10492232F57C50051579F /* main.m */,
