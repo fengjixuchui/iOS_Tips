@@ -97,6 +97,9 @@
 		7869C72324A8B6D200527546 /* SLPictureTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869C72124A8B6D200527546 /* SLPictureTransitionAnimation.m */; };
 		78777CE0238FEA48006FA671 /* SLOpenGLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78777CDF238FEA48006FA671 /* SLOpenGLController.m */; };
 		78777CE6238FF65C006FA671 /* SLDelayPerform.m in Sources */ = {isa = PBXBuildFile; fileRef = 78777CE5238FF65C006FA671 /* SLDelayPerform.m */; };
+		78799EA224EE7EEC00DA8C7A /* SLUnusedResourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78799EA124EE7EEC00DA8C7A /* SLUnusedResourceViewController.m */; };
+		78799EAB24EFC60C00DA8C7A /* SLResourceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 78799EAA24EFC60C00DA8C7A /* SLResourceInfo.m */; };
+		78799EB224F1027300DA8C7A /* unused.png in Resources */ = {isa = PBXBuildFile; fileRef = 78799EB124F1027300DA8C7A /* unused.png */; };
 		787C7DBE245D74E4005DF7ED /* NSMutableArray+SLCrashProtector.m in Sources */ = {isa = PBXBuildFile; fileRef = 787C7DB2245D74E3005DF7ED /* NSMutableArray+SLCrashProtector.m */; };
 		787C7DBF245D74E4005DF7ED /* NSMutableDictionary+SLCrashProtector.m in Sources */ = {isa = PBXBuildFile; fileRef = 787C7DB3245D74E3005DF7ED /* NSMutableDictionary+SLCrashProtector.m */; };
 		787C7DC0245D74E4005DF7ED /* NSDictionary+SLCrashProtector.m in Sources */ = {isa = PBXBuildFile; fileRef = 787C7DB5245D74E3005DF7ED /* NSDictionary+SLCrashProtector.m */; };
@@ -338,6 +341,11 @@
 		78777CDF238FEA48006FA671 /* SLOpenGLController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLOpenGLController.m; sourceTree = "<group>"; };
 		78777CE4238FF65C006FA671 /* SLDelayPerform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLDelayPerform.h; sourceTree = "<group>"; };
 		78777CE5238FF65C006FA671 /* SLDelayPerform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLDelayPerform.m; sourceTree = "<group>"; };
+		78799EA024EE7EEC00DA8C7A /* SLUnusedResourceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLUnusedResourceViewController.h; sourceTree = "<group>"; };
+		78799EA124EE7EEC00DA8C7A /* SLUnusedResourceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLUnusedResourceViewController.m; sourceTree = "<group>"; };
+		78799EA924EFC60C00DA8C7A /* SLResourceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLResourceInfo.h; sourceTree = "<group>"; };
+		78799EAA24EFC60C00DA8C7A /* SLResourceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLResourceInfo.m; sourceTree = "<group>"; };
+		78799EB124F1027300DA8C7A /* unused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unused.png; sourceTree = "<group>"; };
 		787C7DB2245D74E3005DF7ED /* NSMutableArray+SLCrashProtector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SLCrashProtector.m"; sourceTree = "<group>"; };
 		787C7DB3245D74E3005DF7ED /* NSMutableDictionary+SLCrashProtector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SLCrashProtector.m"; sourceTree = "<group>"; };
 		787C7DB4245D74E3005DF7ED /* NSString+SLCrashProtector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SLCrashProtector.h"; sourceTree = "<group>"; };
@@ -869,6 +877,18 @@
 			path = "设计模式";
 			sourceTree = "<group>";
 		};
+		78799E9F24EE7E7F00DA8C7A /* 查找项目无用资源 */ = {
+			isa = PBXGroup;
+			children = (
+				78799EB124F1027300DA8C7A /* unused.png */,
+				78799EA024EE7EEC00DA8C7A /* SLUnusedResourceViewController.h */,
+				78799EA124EE7EEC00DA8C7A /* SLUnusedResourceViewController.m */,
+				78799EA924EFC60C00DA8C7A /* SLResourceInfo.h */,
+				78799EAA24EFC60C00DA8C7A /* SLResourceInfo.m */,
+			);
+			path = "查找项目无用资源";
+			sourceTree = "<group>";
+		};
 		78842455248F92D400C2E505 /* AVFoundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -899,6 +919,7 @@
 				784C4C6D24C5B4F500D5C199 /* 笔记.md */,
 				7884247D2492102900C2E505 /* SLWorkIssuesViewController.h */,
 				7884247E2492102900C2E505 /* SLWorkIssuesViewController.m */,
+				78799E9F24EE7E7F00DA8C7A /* 查找项目无用资源 */,
 				784C4BDE24BC409600D5C199 /* APM */,
 				7811F76C24B2C70D000AA044 /* 二进制重排 */,
 				78EF8B5C24162B07008D0CD7 /* UIMenuController */,
@@ -1351,6 +1372,7 @@
 				782CFB6D239E69F3001B5528 /* Scale.fsh in Resources */,
 				782CFB71239E69FA001B5528 /* Shake.vsh in Resources */,
 				78B1048B232F57C30051579F /* Main.storyboard in Resources */,
+				78799EB224F1027300DA8C7A /* unused.png in Resources */,
 				782CFB27239DFD89001B5528 /* SplitScreen_1.fsh in Resources */,
 				783FB4612394A76B0039AEFD /* shaderf.fsh in Resources */,
 				7811F7AD24B32A1E000AA044 /* Write Link Map File.png in Resources */,
@@ -1518,6 +1540,7 @@
 				7869C72324A8B6D200527546 /* SLPictureTransitionAnimation.m in Sources */,
 				78E179372351A40D0007E4BB /* SLShotFocusView.m in Sources */,
 				787C7DC8245D77D9005DF7ED /* SLZombieCatcher.m in Sources */,
+				78799EA224EE7EEC00DA8C7A /* SLUnusedResourceViewController.m in Sources */,
 				78A4BD45236C5DF20021AE32 /* SLEditVideoController.m in Sources */,
 				78B10485232F57C30051579F /* SceneDelegate.m in Sources */,
 				783FB45C2394A4E10039AEFD /* SLShaderLanguageViewController.m in Sources */,
@@ -1542,6 +1565,7 @@
 				787C7DD22462C5F3005DF7ED /* UIViewController+SLMLeakFinder.m in Sources */,
 				788ADB382441F48F00302CD9 /* SLCrashViewController.m in Sources */,
 				78DAA1162360256200A60F64 /* SLEditSelectedBox.m in Sources */,
+				78799EAB24EFC60C00DA8C7A /* SLResourceInfo.m in Sources */,
 				787C7DCC2462ADE5005DF7ED /* NSObject+SLMLeakFinder.m in Sources */,
 				78E72D792480B36800751373 /* SLScrollViewController.m in Sources */,
 				782CFB20239DEA05001B5528 /* SLSplitScreenCell.m in Sources */,
