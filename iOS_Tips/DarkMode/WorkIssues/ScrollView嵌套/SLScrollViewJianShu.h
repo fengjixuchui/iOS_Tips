@@ -1,8 +1,8 @@
 //
-//  SLScrollviewNesteVC.h
+//  SLScrollViewJianShu.h
 //  DarkMode
 //
-//  Created by wsl on 2020/9/2.
+//  Created by wsl on 2020/9/15.
 //  Copyright © 2020 https://github.com/wsl2ls   ----- . All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-///多个ScrollView/TableView/CollectionView嵌套
-@interface SLScrollviewNesteVC : UITableViewController
+@interface SLScrollViewJianShu : UIViewController
 
 @end
 

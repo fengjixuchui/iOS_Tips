@@ -1,4 +1,4 @@
-# iOS_Tips
+# [iOS_Tips](https://github.com/wsl2ls/iOS_Tips)
 > iOS的一些示例，不定时更新~  
 
 | [简书 ](https://www.jianshu.com/u/e15d1f644bea) | [掘金](https://juejin.im/user/5c00d97b6fb9a049fb436288) |  
@@ -28,7 +28,8 @@
 >> 6.6、iOS 自定义转场动画  
 >> 6.7、二进制重排优化启动速度  
 >> 6.8、iOS APM应用性能监控管理(doing)  
->> 6.9、ipa瘦身之扫描无用资源
+>> 6.9、ipa瘦身之扫描无用资源  
+>> 6.10、多个UIScrollView嵌套/个人中心页
 
 > 7、[iOS Crash防护](#7-iOSCrash防护)  
 > 8、[WKWebView相关](#8-WKWebView相关) 
@@ -134,6 +135,10 @@
 
 > 扫描项目中无用的图片、类等文件资源, 此示例主要针对于此项目中的图片资源，其他类型资源实现原理相同。
 
+#### 6.10、多个UIScrollView嵌套/个人中心页
+
+![多个UIScrollView嵌套](https://github.com/wsl2ls/iOS_TipsPreview/blob/master/PrviewPicture/多个UIScrollView嵌套.gif)
+
 ## 7-iOSCrash防护 
 
 >  Crash防护内容涉及 NSArray/NSMutableArray、NSDictionary/NSMutableDictionary、NSString/NSMutableString、Unrecognized Selector、KVO、KVC 、异步线程刷新UI、野指针定位、内存泄漏/循环引用；主要是对常见易错的地方进行容错处理，避免崩溃，并保存出错时的函数调用栈，以方便快速定位代码，主要是利用的runtime和fishook知识。
@@ -154,6 +159,7 @@
 > * 4、小视频拍摄录制失败，主要集中在plus和X系列手机上：可能是由于写入的视频宽高videoSize设置的问题，各位可以先试试这样设置
 avCaptureTool.videoSize = CGSizeMake(self.view.width * 0.8, self.view.height * 0.8);
 > * 5、当你编译的时候，XCode出现Unable to load contents of file list 错误，导致出现此原因是pods版本不一致，请更新pods版本或者重新安装。
+> * 6、如果发现我简书或掘金上的文章无法查看了，请联系我。
 
 
 #### Welcome to you 👏 您的follow和start，是我前进的动力，Thanks♪(･ω･)ﾉ 🤝
