@@ -30,12 +30,15 @@ static NSMutableArray *_loadInfoArray;
     
     CFAbsoluteTime time1 =CFAbsoluteTimeGetCurrent();
     
+//    [深入iOS系统底层之程序映像](https://www.jianshu.com/p/3b83193ff851)
+    
     int imageCount = (int)_dyld_image_count();
     
     for(int iImg = 0; iImg < imageCount; iImg++) {
         
         const char* path = _dyld_get_image_name((unsigned)iImg);
         NSString *imagePath = [NSString stringWithUTF8String:path];
+//        NSLog(@"映像 %@",imagePath);
         
         NSBundle* mainBundle = [NSBundle mainBundle];
         NSString* bundlePath = [mainBundle bundlePath];
@@ -93,6 +96,7 @@ static NSMutableArray *_loadInfoArray;
     };
     
     [_loadInfoArray addObject:infoDic];
+    NSLog(@"loadTime %@",infoDic.description);
 }
 
 @end
